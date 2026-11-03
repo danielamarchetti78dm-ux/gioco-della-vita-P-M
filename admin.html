@@ -1,0 +1,36 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Account del gioco</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1f2540;--soft:#5b6280;--line:#dde1ee;--acc:#2e9e5b;--accbg:#e3f6ea;--bad:#c23b4b}
+@media (prefers-color-scheme:dark){:root{--bg:#0b100d;--card:#121a15;--ink:#eafff2;--soft:#8fb7a0;--line:#24332a;--acc:#3fd98a;--accbg:#123222;--bad:#ff7b86}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:20px 16px 40px}h1{font-size:24px;margin:0 0 4px}.sub{color:var(--soft);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}.kp div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}.kp b{display:block;font-size:26px}.kp small{color:var(--soft);font-weight:600}
+button{font:inherit;font-weight:700;border-radius:10px;padding:9px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}button.p{background:var(--acc);border-color:var(--acc);color:#fff}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.bar input{flex:1;min-width:180px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;color:var(--soft);text-transform:uppercase;letter-spacing:.5px}
+td small{display:block;color:var(--soft)}.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--accbg);color:var(--acc);font-size:12px;font-weight:700}
+.x{color:var(--bad);border-color:transparent;background:none;padding:4px 6px}.msg{padding:14px;border-radius:12px;background:var(--accbg);margin-bottom:12px}.err{color:var(--bad);font-weight:700}
+@media (max-width:640px){thead{display:none}tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}td{display:block;border:0;padding:3px 0}}
+</style></head><body><div class="w">
+<h1>👥 Account del Gioco della Vita PM</h1><p class="sub">Questa pagina la può vedere solo l'amministratrice.</p>
+<div id="app"><div class="card">⏳ Carico…</div></div></div>
+<script src="fb/firebase-app-compat.js"></script><script src="fb/firebase-auth-compat.js"></script><script src="fb/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({apiKey:"AIzaSyBJRUlGK_ArYn2K_pJ0ePChTUC3gkikwgY",authDomain:"gioco-della-vita-pm.firebaseapp.com",projectId:"gioco-della-vita-pm",storageBucket:"gioco-della-vita-pm.firebasestorage.app",messagingSenderId:"83815479634",appId:"1:83815479634:web:86220d0844b898c5e1628b"});
+const A=firebase.auth(),D=firebase.firestore(),$=s=>document.querySelector(s),app=$('#app');let rows=[];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dt=t=>t&&t.toDate?t.toDate().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+function login(){app.innerHTML=`<div class="card"><p>Entra con il tuo account Google da amministratrice.</p><button class="p" id="g">Accedi con Google</button></div>`;$('#g').onclick=()=>A.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(e=>alert(e.message))}
+function draw(){const q=($('#q')&&$('#q').value||'').toLowerCase(),now=Date.now(),day=864e5;
+  const L=rows.filter(r=>!q||(r.nome+' '+r.email+' '+(r.personaggio&&r.personaggio.nome||'')).toLowerCase().includes(q));
+  const ms=r=>r.ultimo&&r.ultimo.toMillis?r.ultimo.toMillis():0;
+  $('#kp').innerHTML=`<div><b>${rows.length}</b><small>Account in tutto</small></div><div><b>${rows.filter(r=>now-ms(r)<day).length}</b><small>Hanno giocato oggi</small></div><div><b>${rows.filter(r=>now-ms(r)<7*day).length}</b><small>Negli ultimi 7 giorni</small></div><div><b>${rows.filter(r=>r.accesso==='Google').length} / ${rows.filter(r=>r.accesso!=='Google').length}</b><small>Google / Email</small></div>`;
+  $('#tb').innerHTML=L.map(r=>`<tr><td><b>${esc(r.nome)}</b><small>${esc(r.email)}</small></td><td><span class="tag">${esc(r.accesso||'')}</span></td><td>${r.personaggio?`${esc(r.personaggio.nome)}<small>${r.personaggio.eta} anni · ${esc(r.personaggio.citta)}${r.personaggio.vivo?'':' · vita finita'}</small>`:'<small>Non ha ancora giocato</small>'}</td><td>${dt(r.creato)}</td><td>${dt(r.ultimo)}</td><td><button class="x" data-del="${r.id}" title="Cancella i dati di questo account">🗑️</button></td></tr>`).join('')||'<tr><td colspan="6">Nessun account ancora.</td></tr>';
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{const r=rows.find(x=>x.id===b.dataset.del);if(!confirm('Cancellare i dati (e la partita) di '+r.nome+'?'))return;await D.collection('utenti').doc(r.id).delete();load()})}
+async function load(){try{const s=await D.collection('utenti').orderBy('ultimo','desc').get();rows=s.docs.map(d=>({id:d.id,...d.data()}));draw()}
+  catch(e){app.innerHTML=`<div class="card"><p class="err">Non hai il permesso di vedere la lista.</p><p>Sei entrata come <b>${esc(A.currentUser.email)}</b>: entra con l'email dell'amministratrice.</p><button id="o">Esci</button></div>`;$('#o').onclick=()=>A.signOut()}}
+A.onAuthStateChanged(u=>{if(!u)return login();app.innerHTML=`<div class="msg">Sei entrata come <b>${esc(u.email)}</b> · <a href="#" id="o">esci</a></div><div class="kp" id="kp"></div><div class="card"><div class="bar"><input id="q" placeholder="Cerca per nome o email"><button id="r">🔄 Aggiorna</button></div><table><thead><tr><th>Account</th><th>Accesso</th><th>Personaggio</th><th>Creato</th><th>Ultima volta</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>`;
+  $('#o').onclick=e=>{e.preventDefault();A.signOut()};$('#r').onclick=load;$('#q').oninput=draw;load()});
+</script></body></html>
