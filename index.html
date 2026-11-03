@@ -8949,7 +8949,7 @@ async function cl9Push(force,raw,old){const u=OL9.user;if(!u||!OL9.db)return;con
   if(!force&&now-OL9.t<20000){clearTimeout(OL9.tm);OL9.tm=setTimeout(()=>cl9Push(true),20000-(now-OL9.t)+50);return}OL9.t=now;
   if(raw===undefined)raw=localStorage.getItem(LS);let s=null;try{s=JSON.parse(raw||'null')}catch(e){}
   const F=firebase.firestore.FieldValue,data={nome:cl9Nm(u),email:u.email||'',accesso:((u.providerData||[])[0]||{}).providerId==='google.com'?'Google':'Email',ultimo:F.serverTimestamp(),
-    personaggio:s&&s.name?{nome:s.name+' '+(s.surname||''),eta:s.age|0,citta:s.city||'',vivo:!!s.alive,soldi:Math.round((s.money||0)+(s.bank||0))}:null};
+    personaggio:s&&s.name?{nome:s.name+' '+(s.surname||''),eta:s.age|0,citta:s.city||'',vivo:!!s.alive,soldi:Math.round((s.money||0)+(s.bank||0)),fa:(()=>{try{return (S&&S.name===s.name)?stageText():''}catch(e){return ''}})()}:null};
   if(raw&&raw.length<900000)data.salvataggio=raw;if(old===null)data.creato=F.serverTimestamp();
   try{await OL9.db.collection('utenti').doc(u.uid).set(data,{merge:true});localStorage.setItem('vita_cl9t_'+u.uid,String(Date.now()))}catch(e){console.warn('cl9 push',e)}}
 // dopo l'accesso: prende la partita online, oppure porta online quella di adesso
