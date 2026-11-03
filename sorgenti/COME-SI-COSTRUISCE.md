@@ -16,3 +16,4 @@ rm -rf vita9
 - Regole: gioco per bambini, niente marchi veri, non togliere mai funzioni che ci sono già.
 - Test (Playwright, Chromium già installato): `node test/terrB.js` (errori JS, usa DIR=cartella), poi gli altri in `test/`. Per i test 3D: `NOROUTE=1 DIR=vita9 node test/t3t.js`.
 - Gli account online usano Firebase (progetto `gioco-della-vita-pm`), modulo `v9/online9.js`; pagina admin `admin.html`, privacy `privacy.html`.
+- Ogni aggiornamento mensile: in `v9/novita9.js` cambia `NOV9.k` (es. '2026-12') e la lista `NOV9.l` con le novità del mese, così chi gioca vede la finestra "Novità".

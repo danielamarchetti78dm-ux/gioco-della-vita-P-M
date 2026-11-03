@@ -200,7 +200,7 @@ rep("function drawPalazzo(a){",P('viali9.js')+"function drawPalazzo(a){")
 rep("function drawPalazzo(a){",P('palazzi9.js')+"function drawPalazzo(a){")
 rep("function drawPalazzo(a){",P('inizio9.js')+"function drawPalazzo(a){")
 rep("<title>Gioco della Vita</title>",'<title>Gioco della Vita PM</title><meta name="description" content="Gioco della Vita PM: nasci, cresci, vai a scuola, lavora e vivi tutta la tua vita in una città enorme in 3D. Gioco gratis per bambini e ragazzi, da computer e telefono."><meta name="keywords" content="gioco della vita PM, gioco della vita, gioco vita città 3D, simulatore di vita"><meta property="og:title" content="Gioco della Vita PM"><meta property="og:description" content="Nasci, cresci e vivi tutta la tua vita in una città 3D."><meta name="theme-color" content="#07110c">')
-rep("function drawPalazzo(a){",P('dev9.js')+P('acc9.js')+P('online9.js')+"function drawPalazzo(a){")
+rep("function drawPalazzo(a){",P('dev9.js')+P('acc9.js')+P('online9.js')+P('novita9.js')+"function drawPalazzo(a){")
 if os.environ.get('INLINE3'):
   rep("<script>",'<script>'+open('lib/three.min.js').read()+'</script>\n<script>')
 else:
