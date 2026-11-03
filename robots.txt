@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://danielamarchetti78dm-ux.github.io/gioco-della-vita-P-M/sitemap.xml

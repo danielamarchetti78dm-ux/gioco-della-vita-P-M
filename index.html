@@ -1,4 +1,4 @@
-<title>Gioco della Vita</title>
+<title>Gioco della Vita PM</title><meta name="description" content="Gioco della Vita PM: nasci, cresci, vai a scuola, lavora e vivi tutta la tua vita in una città enorme in 3D. Gioco gratis per bambini e ragazzi, da computer e telefono."><meta name="keywords" content="gioco della vita PM, gioco della vita, gioco vita città 3D, simulatore di vita"><meta property="og:title" content="Gioco della Vita PM"><meta property="og:description" content="Nasci, cresci e vivi tutta la tua vita in una città 3D."><meta name="theme-color" content="#07110c">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
@@ -8261,6 +8261,8 @@ function phRender(){let e=$('ph9');if(!e){e=document.createElement('div');e.id='
     <div class="li9" style="display:block"><b>🎨 Colore dei menu</b><small style="display:block;color:var(--soft)">Scegli il colore che ti piace di più</small><div class="col9">${COL9.map(([k,n,c])=>`<button data-col="${k}" class="${phTema()===k?'on':''}" title="${n}" aria-label="${n}" style="--c:${c}"><i></i><span>${n}</span></button>`).join('')}</div></div>
     <button class="li9" data-set="c"><span class="av9">🏙️</span><span class="tx"><b>Grandezza della città</b><small>${{180:'Normale',270:'Grande',360:'Enorme'}[CITYW]||CITYW} · tocca per cambiare (il gioco si ricarica)</small></span></button>
     <button class="li9" data-set="p"><span class="av9">📏</span><span class="tx"><b>Proporzioni vere in 3D</b><small>${VL9.on()?'Sì: strade e piazze più larghe':'No, come prima'} · tocca per cambiare</small></span></button>
+    <button class="li9" data-set="a"><span class="av9">👤</span><span class="tx"><b>Il tuo account</b><small>${ACC9.cur()?esc(ACC9.cur().n)+' · cambia o aggiungi':'Aggiungi il tuo account'}</small></span></button>
+    <button class="li9" data-set="d"><span class="av9">${DV9.pc()?'💻':'📱'}</span><span class="tx"><b>Modalità</b><small>${DV9.pc()?'Computer: soldi e scuola/lavoro a destra':'Telefono: schermo pulito'} · tocca per cambiare</small></span></button>
     <button class="li9" data-set="g"><span class="av9">🔠</span><span class="tx"><b>Scritte grandi</b><small>${SET9.on('tg')?'Sì, più grandi':'No, normali'} · tocca per cambiare</small></span></button>
     <button class="li9" data-set="m"><span class="av9">🗺️</span><span class="tx"><b>Cartina in basso</b><small>${SET9.on('nomap')?'Nascosta':'Visibile'} · tocca per cambiare</small></span></button>
     <button class="li9" data-set="o"><span class="av9">🕒</span><span class="tx"><b>Orologio sullo schermo</b><small>${SET9.on('noclk')?'Nascosto':'Visibile'} · tocca per cambiare</small></span></button>
@@ -8295,7 +8297,7 @@ function phRender(){let e=$('ph9');if(!e){e=document.createElement('div');e.id='
     S.money-=d;S.bank+=d;updateHud();save();toast(d>0?`🏦 Hai messo ${eur(d)} in banca`:`💶 Hai preso ${eur(-d)} dalla banca`);phRender()};
   e.querySelectorAll('[data-dep]').forEach(b=>b.onclick=()=>mv(b.dataset.dep==='tutto'?S.money:+b.dataset.dep));
   e.querySelectorAll('[data-wd]').forEach(b=>b.onclick=()=>mv(-(b.dataset.wd==='tutto'?S.bank:+b.dataset.wd)));
-  e.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{const k=b.dataset.set;if(k==='s'){save();toast('💾 Partita salvata!');return}if(k==='t'){phSetTema(phTema()==='neon'?'normale':'neon');phRender();return}if(SET9.k[k]){SET9.flip(SET9.k[k]);phRender();return}if(k==='p'){try{localStorage.setItem('vita_s9_prop',VL9.on()?'0':'1')}catch(_){}toast(VL9.on()?'📏 Proporzioni vere attivate':'↩️ Proporzioni come prima');phRender();return}if(k==='c'){const n={180:270,270:360,360:180}[CITYW]||270;try{localStorage.setItem('vita_cityW',n)}catch(_){}S.scene=HOME();S.pos={x:3.5,y:5.5};S.escort=null;S.drive=null;S.famDrive=null;S.parked=null;S.carOut=false;save();toast('🏙️ Sto costruendo la città nuova…');setTimeout(()=>location.reload(),900);return}
+  e.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{const k=b.dataset.set;if(k==='s'){save();toast('💾 Partita salvata!');return}if(k==='t'){phSetTema(phTema()==='neon'?'normale':'neon');phRender();return}if(k==='a'){PH9.app='acc9';phRender();return}if(k==='d'){DV9.set(DV9.pc()?'tel':'pc');phRender();return}if(SET9.k[k]){SET9.flip(SET9.k[k]);phRender();return}if(k==='p'){try{localStorage.setItem('vita_s9_prop',VL9.on()?'0':'1')}catch(_){}toast(VL9.on()?'📏 Proporzioni vere attivate':'↩️ Proporzioni come prima');phRender();return}if(k==='c'){const n={180:270,270:360,360:180}[CITYW]||270;try{localStorage.setItem('vita_cityW',n)}catch(_){}S.scene=HOME();S.pos={x:3.5,y:5.5};S.escort=null;S.drive=null;S.famDrive=null;S.parked=null;S.carOut=false;save();toast('🏙️ Sto costruendo la città nuova…');setTimeout(()=>location.reload(),900);return}
     const id=k==='v'?'td9v':'td9q',el=$(id);if(!el){toast('La vista 3D non c\'è su questo telefono.');return}ui.ph9=0;try{el.onclick()}catch(_){}ui.ph9=1;setTimeout(phRender,60)})}
 $('phoneBtn')&&($('phoneBtn').onclick=()=>phOpen());
 // ---- pausa
@@ -8729,6 +8731,199 @@ function pz9Row(o,H){const r=seeded(o.x*23+o.y*11+4),side=pz9Side(o),put=pz9Put(
 {const _b=tdBuildCity;tdBuildCity=function(){PAL9.tips=[];const r=_b.apply(this,arguments);try{const sc=TD.city&&TD.city.sc,T2=PAL9.tips;if(sc&&T2.length){const im=new THREE.InstancedMesh(new THREE.SphereGeometry(.06,8,6),new THREE.MeshBasicMaterial({color:new THREE.Color(2.5,.2,.15),toneMapped:false}),T2.length),o=new THREE.Object3D();
   T2.forEach(([x,y,z],i)=>{o.position.set(x,y,z);o.updateMatrix();im.setMatrixAt(i,o.matrix)});sc.add(im);PAL9.tipM=im}}catch(e){console.warn('palazzi9',e)}return r}}
 {const _d=tdDynamic;tdDynamic=function(scn,dt,city){const r=_d.apply(this,arguments);try{if(city&&PAL9.tipM){const dk=typeof gtaDark==='function'?gtaDark()/.5:0;PAL9.tipM.visible=dk>.1?(TD.time%1.6)<.8:true}}catch(e){}return r}}
+/* ================= v9: schermata iniziale più bella e più completa, e la scena della nascita ================= */
+{const st=document.createElement('style');st.id='inizio9';st.textContent=`
+#screen.st9{background:linear-gradient(180deg,#0b1030 0%,#1d2a5c 38%,#5b3f78 62%,#e0846a 82%,#f6c27a 100%)!important}
+#screen.st9 .in{position:relative;z-index:2;padding-bottom:30px}
+#sky9{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#sky9 .star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:tw9 3s ease-in-out infinite}
+@keyframes tw9{0%,100%{opacity:.25}50%{opacity:1}}
+#sky9 .moon{position:absolute;right:9%;top:7%;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbe6,#f3e3a2 60%,#d9c27a);box-shadow:0 0 40px rgba(255,240,180,.55)}
+@media (max-width:520px){#sky9 .moon{width:34px;height:34px;right:5%;top:2.5%;opacity:.85}}
+#sky9 .cl{position:absolute;height:22px;border-radius:30px;background:rgba(255,255,255,.12);filter:blur(2px);animation:cl9 linear infinite}
+@keyframes cl9{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+#sky9 svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%}
+#screen.st9 h1{font-size:52px!important;line-height:1;margin:6px 0 0;background:linear-gradient(90deg,#7dffb3,#3fd98a,#bff7ff);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-shadow:none!important;filter:drop-shadow(0 0 14px rgba(63,217,138,.55))}
+#screen.st9 .tag9{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+#screen.st9 .tag9 span{background:rgba(5,12,8,.65);border:1px solid rgba(63,217,138,.45);color:#dfffe9;border-radius:99px;padding:4px 10px;font:800 12px var(--f-body)}
+#screen.st9 .life9{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;margin:14px 0 4px;padding:10px 12px;border-radius:18px;background:rgba(5,12,8,.6);border:1px solid rgba(63,217,138,.35)}
+#screen.st9 .life9 div{display:grid;justify-items:center;gap:2px;font:800 10px var(--f-body);color:#bfe9cf;flex:1;position:relative}
+#screen.st9 .life9 div b{font-size:24px;animation:hop9 2.4s ease-in-out infinite}
+#screen.st9 .life9 div:not(:last-child)::after{content:'';position:absolute;right:-6px;top:14px;width:12px;height:2px;background:rgba(63,217,138,.6)}
+@keyframes hop9{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+#screen.st9 #prev{width:96px!important;height:120px!important;background:radial-gradient(circle at 50% 30%,#f6fbff,#cfe7f7)!important;animation:hop9 2.6s ease-in-out infinite}
+.dice9{border:1.5px solid var(--neon,#3fd98a);background:#0b1610;color:#fff;border-radius:12px;width:44px;height:44px;font-size:22px;cursor:pointer;flex:none;align-self:flex-end}
+.dice9:active{transform:rotate(30deg) scale(.95)}
+.ch9{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.ch9 button{display:flex;gap:8px;align-items:center;text-align:left;border-radius:14px;padding:9px 10px;border:1.5px solid rgba(63,217,138,.32);background:#0b1610;color:#eafff2;font:700 13px var(--f-body);cursor:pointer}
+.ch9 button small{display:block;color:#8fd9ad;font-weight:700;font-size:11px}
+.ch9 button[aria-pressed="true"]{border-color:#3fd98a;background:#0f5a30;box-shadow:0 0 12px rgba(63,217,138,.45)}
+.ch9 button i{font-style:normal;font-size:22px}
+html.tn9 .ch9 button,html.tn9 .dice9{background:#fff;color:#1f2540;border-color:#d6d9e6}html.tn9 .ch9 button small{color:#5b6280}html.tn9 .ch9 button[aria-pressed="true"]{background:#e3f6ea;border-color:#2e9e5b}
+#born{position:relative;overflow:hidden}#born::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-100%);animation:sh9 2.8s ease-in-out infinite}
+@keyframes sh9{60%,100%{transform:translateX(100%)}}
+/* scena della nascita */
+#nasc9{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 30%,#22336e 0%,#0c1233 60%,#05070f 100%);color:#fff;text-align:center;overflow:hidden;cursor:pointer;opacity:0;transition:opacity .6s}
+#nasc9.on{opacity:1}#nasc9.out{opacity:0}
+#nasc9 .st{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw9 2.5s infinite}
+#nasc9 .bx{position:relative;z-index:2;max-width:440px;padding:20px}
+#nasc9 .l1{font:800 18px var(--f-body);color:#cfe0ff;opacity:0;transform:translateY(10px);transition:all .8s}
+#nasc9 .bb{font-size:84px;margin:10px 0;opacity:0;transform:scale(.4);transition:all .9s cubic-bezier(.2,1.6,.4,1)}
+#nasc9 .l2{font:900 34px var(--f-disp);line-height:1.1;opacity:0;transition:all .8s;background:linear-gradient(90deg,#ffd6e8,#fff,#c9f7ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+#nasc9 .card{margin-top:16px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);font:700 14px var(--f-body);line-height:1.6;opacity:0;transform:translateY(12px);transition:all .8s;text-align:left;color:#eef3ff}
+#nasc9 .go{margin-top:18px;opacity:0;transition:opacity .8s;font:900 18px var(--f-disp);padding:12px 26px;border-radius:99px;border:2px solid #3fd98a;background:#0b1610;color:#3fd98a;box-shadow:0 0 16px rgba(63,217,138,.5);cursor:pointer}
+#nasc9.s1 .l1,#nasc9.s2 .bb,#nasc9.s3 .l2,#nasc9.s4 .card,#nasc9.s5 .go{opacity:1;transform:none}
+#nasc9 .cf{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:cf9 linear forwards}
+@keyframes cf9{to{transform:translateY(110vh) rotate(720deg)}}
+#nasc9 .skip{position:absolute;bottom:14px;right:16px;font:700 12px var(--f-body);color:#9fb0d8}
+`;document.head.appendChild(st)}
+const CHAR9=[['curioso','🔍','Curios@','Impari più in fretta','int'],['simpatico','😄','Simpatic@','Fai amicizia facilmente','sim'],['sportivo','⚽','Sportiv@','Corri e giochi meglio','spo'],['allegro','🌈','Allegr@','Sei sempre di buon umore','fel']];
+const SEAS9=[['primavera','🌸','Primavera'],['estate','☀️','Estate'],['autunno','🍂','Autunno'],['inverno','❄️','Inverno']];
+ui.st9=ui.st9||{car:'curioso',sea:['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'][new Date().getMonth()]};
+function st9G(t){return (ui.sex==='f'?t.replace(/@/g,'a'):t.replace(/@/g,'o'))}
+function st9Sky(){if($('sky9'))return;const d=document.createElement('div');d.id='sky9';let h='<div class="moon"></div>';
+  for(let i=0;i<70;i++)h+=`<i class="star" style="left:${Math.random()*100}%;top:${Math.random()*55}%;animation-delay:${(Math.random()*3).toFixed(2)}s;opacity:${(.3+Math.random()*.7).toFixed(2)}"></i>`;
+  for(let i=0;i<4;i++)h+=`<i class="cl" style="top:${8+i*11}%;width:${120+Math.random()*160}px;animation-duration:${40+i*14}s;animation-delay:-${(Math.random()*40).toFixed(1)}s"></i>`;
+  // profilo della città con le finestre accese
+  let s='<svg viewBox="0 0 1000 300" preserveAspectRatio="none">',x=0,r=seeded(4242);
+  while(x<1000){const w=40+r()*70,hh=60+r()*200,y=300-hh,c=['#0b1024','#121a38','#0e1530'][(r()*3)|0];s+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="${c}"/>`;
+    for(let wy=y+10;wy<290;wy+=16)for(let wx=x+6;wx<x+w-8;wx+=12)if(r()<.38)s+=`<rect x="${wx}" y="${wy}" width="6" height="8" fill="${r()<.8?'#ffd98a':'#9fe7ff'}" opacity="${(.5+r()*.5).toFixed(2)}"/>`;
+    if(r()<.25)s+=`<rect x="${x+w/2-1}" y="${y-24}" width="2" height="24" fill="#2a3358"/><circle cx="${x+w/2}" cy="${y-26}" r="3" fill="#ff5a5a"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>`;x+=w+2+r()*6}
+  s+='<rect x="0" y="292" width="1000" height="8" fill="#060914"/></svg>';d.innerHTML=h+s;$('screen').prepend(d)}
+{const _s=showStart;showStart=function(){const r=_s.apply(this,arguments);try{const sc=$('screen');sc.classList.add('st9');st9Sky();
+  const h1=sc.querySelector('h1');if(h1&&!sc.querySelector('.tag9')){if(!/PM/.test(h1.textContent))h1.insertAdjacentHTML('beforeend',' <span style="font-size:.6em;opacity:.9">PM</span>');const p=h1.parentNode;
+    p.insertAdjacentHTML('beforeend','<div class="tag9"><span>🏙️ Città enorme in 3D</span><span>🚗 Guida e semafori</span><span>📱 Telefono</span><span>💼 Lavori e case</span><span>❤️ Famiglia e amici</span></div><div class="life9"><div><b>👶</b>Nasci</div><div><b>🧒</b>Scuola</div><div><b>🧑‍🎓</b>Studi</div><div><b>👩‍💼</b>Lavoro</div><div><b>🏡</b>Casa</div><div><b>👴</b>Nonno</div></div>')}
+  // nome a caso con il dado
+  const nm=$('nm');if(nm&&!$('dice9')){const b=document.createElement('button');b.type='button';b.id='dice9';b.className='dice9';b.title='Un nome a caso';b.textContent='🎲';nm.parentNode.parentNode.appendChild(b);
+    b.onclick=ev=>{ev.stopPropagation();nm.value=pick(ui.sex==='f'?NOMI_F:NOMI_M);nm.focus()}}
+  // carattere e stagione di nascita, prima del pulsante Nasci
+  const born=$('born');if(born&&!$('ch9')){const box=document.createElement('div');box.id='ch9';box.innerHTML=
+    `<div class="field"><label>Che carattere hai?</label><div class="ch9">${CHAR9.map(([k,ic,n,d])=>`<button type="button" data-ch9="${k}" aria-pressed="${ui.st9.car===k}"><i>${ic}</i><span>${st9G(n)}<small>${d}</small></span></button>`).join('')}</div></div>
+     <div class="field" style="margin-top:12px"><label>In che stagione nasci?</label><div class="ch9" style="grid-template-columns:repeat(4,1fr)">${SEAS9.map(([k,ic,n])=>`<button type="button" data-se9="${k}" aria-pressed="${ui.st9.sea===k}" style="justify-content:center;flex-direction:column;gap:2px"><i>${ic}</i><span style="font-size:12px">${n}</span></button>`).join('')}</div></div>`;
+    born.parentNode.insertBefore(box,born);
+    box.onclick=ev=>{const c=ev.target.closest('[data-ch9]'),s=ev.target.closest('[data-se9]');if(c){ui.st9.car=c.dataset.ch9;box.querySelectorAll('[data-ch9]').forEach(b=>b.setAttribute('aria-pressed',b===c))}if(s){ui.st9.sea=s.dataset.se9;box.querySelectorAll('[data-se9]').forEach(b=>b.setAttribute('aria-pressed',b===s))}ev.stopPropagation()}}
+  born&&(born.innerHTML='Nasci! 👶✨')}catch(e){console.warn('inizio9',e)}return r}}
+// il carattere dà una piccola spinta all'inizio
+{const _n=newLife;newLife=function(){const r=_n.apply(this,arguments);try{const c=CHAR9.find(x=>x[0]===ui.st9.car);if(c&&S.st){S.st[c[4]]=Math.min(100,(S.st[c[4]]||0)+10)}S.car9=ui.st9.car;S.sea9=ui.st9.sea;S.peso9=(2.8+Math.random()*1.2).toFixed(1).replace('.',',')}catch(e){}return r}}
+// la scena della nascita, prima di cominciare a giocare
+function nasc9Show(){if($('nasc9'))return;const d=document.createElement('div');d.id='nasc9';const s=SEAS9.find(x=>x[0]===S.sea9)||SEAS9[3],nato=S.sex==='f'?'È nata':'È nato',c=CHAR9.find(x=>x[0]===S.car9);
+  let stars='';for(let i=0;i<60;i++)stars+=`<i class="st" style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${(Math.random()*2.5).toFixed(2)}s"></i>`;
+  d.innerHTML=stars+`<div class="bx"><div class="l1">${s[1]} Una notte di ${s[2].toLowerCase()} a ${esc(S.city||'')}…</div><div class="bb">👶</div><div class="l2">${nato} ${esc(S.name)} ${esc(S.surname||'')}!</div>
+    <div class="card">👩 Mamma <b>${esc(S.mamma)}</b> e 👨 papà <b>${esc(S.papa)}</b> ti stringono forte.<br>⚖️ Peso: <b>${S.peso9} kg</b> · ${s[1]} Stagione: <b>${s[2]}</b><br>${c?c[1]+' Carattere: <b>'+st9G(c[2])+'</b> — '+c[3].toLowerCase():''}<br>🏙️ Benvenut${S.sex==='f'?'a':'o'} al mondo: la tua vita comincia adesso!</div>
+    <button class="go" type="button">Inizia a vivere ▶</button></div><div class="skip">tocca per continuare</div>`;
+  document.body.appendChild(d);requestAnimationFrame(()=>d.classList.add('on'));
+  const T=[[300,'s1'],[1300,'s2'],[2300,'s3'],[3300,'s4'],[4200,'s5']];const tm=T.map(([t,k])=>setTimeout(()=>d.classList.add(k),t));
+  setTimeout(()=>{const cols=['#ff6fb5','#ffd84a','#3fd98a','#6fb8ff','#ffffff','#ff9d42'];for(let i=0;i<70;i++){const e=document.createElement('i');e.className='cf';e.style.cssText=`left:${Math.random()*100}%;background:${cols[i%cols.length]};animation-duration:${2.5+Math.random()*2.5}s;animation-delay:${(Math.random()*1.2).toFixed(2)}s`;d.appendChild(e)}},2300);
+  let step=0;const end=()=>{tm.forEach(clearTimeout);d.classList.add('out');setTimeout(()=>d.remove(),650)};
+  d.onclick=ev=>{if(ev.target.closest('.go')||d.classList.contains('s5'))return end();tm.forEach(clearTimeout);T.forEach(([,k])=>d.classList.add(k))};
+  setTimeout(()=>{if(d.isConnected)end()},14000)}
+{const _g=startGame;startGame=function(){const r=_g.apply(this,arguments);try{if(S&&S.age===0&&!S.nasc9&&!navigator.webdriver){S.nasc9=1;save();nasc9Show()}else if(S&&S.age===0&&!S.nasc9&&window.NASC9T){S.nasc9=1;nasc9Show()}}catch(e){}return r}}
+// quando si esce dalla schermata iniziale il cielo animato si toglie
+{const _g=startGame;startGame=function(){try{const k=$('sky9');if(k)k.remove();$('screen').classList.remove('st9')}catch(e){}return _g.apply(this,arguments)}}
+/* ================= v9: modalità Computer o Telefono ================= */
+const DV9={get(){try{const v=localStorage.getItem('vita_dev9');if(v==='pc'||v==='tel')return v}catch(e){}return (matchMedia('(pointer:coarse)').matches||innerWidth<760)?'tel':'pc'},
+  pc(){return this.get()==='pc'},
+  set(v,q){try{localStorage.setItem('vita_dev9',v)}catch(e){}this.apply();if(!q)toast(v==='pc'?'💻 Modalità computer':'📱 Modalità telefono')},
+  apply(){document.documentElement.classList.toggle('dv9pc',this.pc());dv9Upd()}};
+{const st=document.createElement('style');st.id='dev9';st.textContent=`
+.dv9{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dv9 button{display:flex;gap:10px;align-items:center;border-radius:14px;padding:10px 12px;border:1.5px solid rgba(63,217,138,.32);background:#0b1610;color:#eafff2;font:700 14px var(--f-body);cursor:pointer;text-align:left}
+.dv9 button i{font-style:normal;font-size:26px}.dv9 button small{display:block;color:#8fd9ad;font-size:11px}
+.dv9 button[aria-pressed="true"]{border-color:#3fd98a;background:#0f5a30;box-shadow:0 0 12px rgba(63,217,138,.45)}
+html.tn9 .dv9 button{background:#fff;color:#1f2540;border-color:#d6d9e6}html.tn9 .dv9 button small{color:#5b6280}html.tn9 .dv9 button[aria-pressed="true"]{background:#e3f6ea;border-color:#2e9e5b}
+#pc9{display:none}
+html.dv9pc #pc9{display:grid;position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:6;gap:8px;width:210px;pointer-events:none}
+#pc9 div{background:rgba(6,14,10,.82);border:1.5px solid rgba(63,217,138,.55);border-radius:16px;padding:9px 13px;color:#fff;box-shadow:0 0 14px rgba(63,217,138,.25);backdrop-filter:blur(6px)}
+#pc9 small{display:block;font:800 10px var(--f-body);letter-spacing:1.3px;color:#8fd9ad;text-transform:uppercase}
+#pc9 b{display:block;font:900 20px var(--f-disp);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pc9 .sc b{font-size:16px;white-space:normal}#pc9 b.neg{color:#ff7b86}
+html.tn9 #pc9 div{background:rgba(255,255,255,.94);border-color:#d6d9e6;color:#1f2540;box-shadow:0 4px 14px rgba(0,0,0,.15)}html.tn9 #pc9 small{color:#5b6280}
+`;document.head.appendChild(st)}
+function dv9Upd(){let p=$('pc9');if(!DV9.pc()||typeof S==='undefined'||!S||!S.name){if(p)p.innerHTML='';return}
+  if(!p){p=document.createElement('div');p.id='pc9';document.body.appendChild(p)}
+  let st='';try{st=stageText()}catch(e){}
+  const ic=S.age<3?'👶':S.school?'🎒':S.uni?'🎓':S.job?'💼':S.retired?'🏖️':'🔎',m=Math.round(S.money||0);
+  const h=`<div><small>💵 Soldi in tasca</small><b class="${m<0?'neg':''}">${eur(m)}</b></div>`+(S.bank!=null?`<div><small>🏦 Soldi in banca</small><b class="${S.bank<0?'neg':''}">${eur(Math.round(S.bank))}</b></div>`:`<div><small>🏦 Soldi in banca</small><b style="opacity:.6;font-size:14px">Ancora nessun conto</b></div>`)+
+    `<div class="sc"><small>${ic} ${S.job?'Lavoro':'Cosa fai'}</small><b>${esc(st)}</b></div><div><small>🎂 Età</small><b>${S.age} ann${S.age===1?'o':'i'}</b></div>`;
+  if(p._h!==h){p.innerHTML=h;p._h=h}}
+{const _u=updateHud;updateHud=function(){const r=_u.apply(this,arguments);try{dv9Upd()}catch(e){}return r}}
+// scelta all'inizio
+{const _s=showStart;showStart=function(){const r=_s.apply(this,arguments);try{const ch=$('ch9')||$('born');if(ch&&!$('dv9')){const d=document.createElement('div');d.id='dv9';d.className='field';d.style.marginBottom='12px';
+  const draw=()=>{const v=DV9.get();d.innerHTML=`<label>Dove giochi?</label><div class="dv9"><button type="button" data-dv="pc" aria-pressed="${v==='pc'}"><i>💻</i><span>Computer<small>Soldi e scuola a destra</small></span></button><button type="button" data-dv="tel" aria-pressed="${v==='tel'}"><i>📱</i><span>Telefono<small>Schermo pulito</small></span></button></div>`};draw();
+  ch.parentNode.insertBefore(d,ch);d.onclick=ev=>{const b=ev.target.closest('[data-dv]');if(b){DV9.set(b.dataset.dv,1);draw()}ev.stopPropagation()}}}catch(e){console.warn('dev9',e)}return r}}
+try{DV9.apply()}catch(e){}
+/* ================= v9: account dei giocatori (salvati in questo browser) ================= */
+const ACC9={IC:['🦁','🐯','🐼','🦊','🐸','🐵','🦄','🐶','🐱','🐧','🚀','⚽'],
+  d(){try{const o=JSON.parse(localStorage.getItem('vita_acc9')||'null');if(o&&Array.isArray(o.list))return o}catch(e){}return {list:[],cur:null}},
+  w(o){try{localStorage.setItem('vita_acc9',JSON.stringify(o))}catch(e){}},
+  cur(){const o=this.d();return o.list.find(a=>a.id===o.cur)||null},
+  // salva la partita di adesso nello spazio dell'account attuale
+  stash(){const o=this.d();if(!o.cur)return;try{if(S)save();const v=localStorage.getItem(LS);if(v)localStorage.setItem('vita_sv9_'+o.cur,v);else localStorage.removeItem('vita_sv9_'+o.cur)}catch(e){}},
+  add(name,ic){name=String(name||'').trim().slice(0,18);if(!name){toast('✏️ Scrivi un nome per l\'account');return null}
+    const o=this.d(),a={id:'a'+Date.now().toString(36)+Math.floor(Math.random()*1e4),n:name,ic:ic||pick(this.IC),t:Date.now()};
+    if(!o.list.length){o.list.push(a);o.cur=a.id;this.w(o);this.stash();toast(`👤 Account di ${name} creato! Il gioco si ricorda di te.`);return a}
+    this.stash();o.list.push(a);o.cur=a.id;this.w(o);try{localStorage.removeItem(LS)}catch(e){}acc9Go();return a},
+  use(id){const o=this.d();if(o.cur===id)return;this.stash();o.cur=id;this.w(o);try{const v=localStorage.getItem('vita_sv9_'+id);if(v)localStorage.setItem(LS,v);else localStorage.removeItem(LS)}catch(e){}acc9Go()},
+  newGame(){this.stash();try{localStorage.removeItem(LS)}catch(e){}const o=this.d();if(o.cur){try{localStorage.removeItem('vita_sv9_'+o.cur)}catch(e){}}acc9Go()},
+  del(id){const o=this.d();o.list=o.list.filter(a=>a.id!==id);try{localStorage.removeItem('vita_sv9_'+id)}catch(e){}if(o.cur===id){o.cur=o.list[0]?o.list[0].id:null;this.w(o);try{const v=o.cur&&localStorage.getItem('vita_sv9_'+o.cur);if(v)localStorage.setItem(LS,v);else localStorage.removeItem(LS)}catch(e){}acc9Go();return}this.w(o)},
+  info(id){try{const s=JSON.parse(localStorage.getItem(id===this.d().cur?LS:'vita_sv9_'+id)||'null');if(s&&s.name)return `${s.name}, ${s.age} ann${s.age===1?'o':'i'}${s.alive?'':' · vita finita'}`}catch(e){}return 'Nessuna partita ancora'}};
+let acc9Busy=0;function acc9Go(){acc9Busy=1;S=null;setTimeout(()=>location.reload(),350)}
+// codice per portare la partita su un altro computer o telefono
+async function acc9Code(){if(S)save();const raw=localStorage.getItem(LS)||'';if(!raw)return '';try{const cs=new Blob([raw]).stream().pipeThrough(new CompressionStream('gzip'));const b=new Uint8Array(await new Response(cs).arrayBuffer());let s='';for(let i=0;i<b.length;i+=8192)s+=String.fromCharCode.apply(null,b.subarray(i,i+8192));return 'VITA1:'+btoa(s)}catch(e){return 'VITA0:'+btoa(unescape(encodeURIComponent(raw)))}}
+async function acc9Read(code){code=String(code||'').trim().replace(/\s+/g,'');let raw='';
+  if(code.startsWith('VITA1:')){const bin=atob(code.slice(6)),b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);raw=await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
+  else if(code.startsWith('VITA0:'))raw=decodeURIComponent(escape(atob(code.slice(6))));else throw 0;
+  const s=JSON.parse(raw);if(!s||!s.st||!s.name)throw 0;return raw}
+async function acc9Import(code){try{const raw=await acc9Read(code),s=JSON.parse(raw);ACC9.stash();const o=ACC9.d(),a={id:'a'+Date.now().toString(36),n:s.name,ic:pick(ACC9.IC),t:Date.now()};o.list.push(a);o.cur=a.id;ACC9.w(o);localStorage.setItem(LS,raw);toast(`✅ Partita di ${s.name} caricata!`);acc9Go()}catch(e){toast('❌ Codice non valido: controlla di averlo copiato tutto')}}
+{const st=document.createElement('style');st.id='acc9s';st.textContent=`
+.acc9{display:grid;gap:8px}
+.acc9 .row{display:flex;gap:8px;align-items:center;border-radius:14px;padding:8px 10px;border:1.5px solid rgba(63,217,138,.32);background:#0b1610;color:#eafff2}
+.acc9 .row.on{border-color:#3fd98a;background:#0f5a30}
+.acc9 .row i{font-style:normal;font-size:26px}.acc9 .row span{flex:1;min-width:0;font:800 14px var(--f-body)}.acc9 .row small{display:block;color:#8fd9ad;font-weight:700;font-size:11px}
+.acc9 button.b{border-radius:12px;padding:8px 12px;border:0;background:#3fd98a;color:#04140a;font:900 13px var(--f-body);cursor:pointer;white-space:nowrap}
+.acc9 button.b.alt{background:transparent;color:inherit;border:1.5px solid rgba(63,217,138,.45)}
+.acc9 .mk{display:flex;gap:8px}.acc9 input,.acc9 textarea{flex:1;min-width:0;border-radius:12px;border:1.5px solid rgba(63,217,138,.4);background:#050a07;color:#eafff2;padding:9px 10px;font:700 14px var(--f-body)}
+.acc9 textarea{min-height:70px;font:600 11px monospace;word-break:break-all;width:100%;box-sizing:border-box}
+html.tn9 .acc9 .row{background:#fff;color:#1f2540;border-color:#d6d9e6}html.tn9 .acc9 .row.on{background:#e3f6ea;border-color:#2e9e5b}html.tn9 .acc9 .row small{color:#5b6280}
+html.tn9 .acc9 input,html.tn9 .acc9 textarea{background:#fff;color:#1f2540;border-color:#d6d9e6}html.tn9 .acc9 button.b{background:#2e9e5b;color:#fff}html.tn9 .acc9 button.b.alt{background:#fff;color:#1f2540;border-color:#d6d9e6}
+#acc9w{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(2,6,12,.72);backdrop-filter:blur(6px);padding:16px}
+#acc9w .bx{width:min(420px,100%);max-height:90vh;overflow:auto;background:#07110c;border:2px solid #3fd98a;border-radius:22px;padding:18px;color:#eafff2;box-shadow:0 0 30px rgba(63,217,138,.35);text-align:center}
+#acc9w h2{margin:4px 0 2px;font:900 24px var(--f-disp)}#acc9w p{margin:0 0 12px;color:#8fd9ad;font-weight:700}
+#acc9w .acc9{text-align:left}#acc9w .big{width:100%;padding:13px;font-size:17px;margin:6px 0 4px}
+html.tn9 #acc9w .bx{background:#fff;color:#1f2540;border-color:#2e9e5b}html.tn9 #acc9w p{color:#5b6280}
+`;document.head.appendChild(st)}
+function acc9List(full){const o=ACC9.d();return o.list.map(a=>`<div class="row${a.id===o.cur?' on':''}"><i>${a.ic}</i><span>${esc(a.n)}<small>${a.id===o.cur?'Questo sei tu adesso · ':''}${esc(ACC9.info(a.id))}</small></span>${a.id===o.cur?'':`<button type="button" class="b" data-acc-use="${a.id}">Gioca</button>`}${full?`<button type="button" class="b alt" data-acc-del="${a.id}" title="Cancella">🗑️</button>`:''}</div>`).join('')}
+function acc9Make(lbl){return `<div class="mk"><input id="acc9nm" maxlength="18" placeholder="Il tuo nome" autocomplete="off"><button type="button" class="b" data-acc-add="1">${lbl||'Crea'}</button></div>`}
+function acc9Bind(root){root.querySelectorAll('[data-acc-use]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();ACC9.use(b.dataset.accUse)});
+  root.querySelectorAll('[data-acc-del]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const a=ACC9.d().list.find(x=>x.id===b.dataset.accDel);if(a&&confirm(`Vuoi cancellare l'account di ${a.n} e la sua partita?`))ACC9.del(a.id);if(!acc9Busy&&typeof phRender==='function'&&ui.ph9)phRender()});
+  root.querySelectorAll('[data-acc-add]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const i=root.querySelector('#acc9nm');const a=ACC9.add(i&&i.value);if(a&&!acc9Busy){const box=$('acc9st');if(box)acc9Start(box);if(ui.ph9)phRender()}});
+  root.querySelectorAll('#acc9nm,textarea').forEach(i=>i.onkeydown=ev=>ev.stopPropagation());
+  root.querySelectorAll('[data-acc-new]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();if(!S||!S.alive||confirm('Vuoi cominciare una vita nuova? La partita di adesso di questo account si cancella.'))ACC9.newGame()});
+  root.querySelectorAll('[data-acc-x]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const w=$('acc9w');if(w)w.remove()});
+  root.querySelectorAll('[data-acc-code]').forEach(b=>b.onclick=async ev=>{ev.stopPropagation();const t=root.querySelector('#acc9code');const c=await acc9Code();if(!c){toast('Non c\'è ancora una partita da copiare');return}if(t){t.value=c;t.select()}try{await navigator.clipboard.writeText(c);toast('📋 Codice copiato! Incollalo sull\'altro computer o telefono')}catch(_){toast('📋 Copia il codice qui sotto')}});
+  root.querySelectorAll('[data-acc-imp]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const t=root.querySelector('#acc9code');acc9Import(t&&t.value)})}
+// riquadro account nella schermata iniziale
+function acc9Start(box){const o=ACC9.d(),c=ACC9.cur();
+  box.innerHTML=`<label>👤 Il tuo account</label><div class="acc9">${o.list.length?acc9List(0):'<div style="font-weight:700;opacity:.85">Vuoi aggiungere il tuo account? Così il gioco si ricorda di te ogni volta.</div>'}${acc9Make(o.list.length?'+ Nuovo':'Crea account')}
+    <details><summary style="cursor:pointer;font-weight:800;font-size:13px">📲 Hai un codice da un altro computer o telefono?</summary><div class="acc9" style="margin-top:8px"><textarea id="acc9code" placeholder="Incolla qui il codice della tua partita"></textarea><button type="button" class="b" data-acc-imp="1">Carica la mia partita</button></div></details></div>`;
+  acc9Bind(box);const nm=$('nm');if(c&&nm&&!nm._acc9){nm._acc9=1}}
+{const _s=showStart;showStart=function(){const r=_s.apply(this,arguments);try{const ref=$('dv9')||$('ch9')||$('born');const card=document.querySelector('#screen .card');if(card&&!$('acc9st')){const d=document.createElement('div');d.id='acc9st';d.className='field';card.insertBefore(d,card.firstChild);acc9Start(d)}}catch(e){console.warn('acc9',e)}return r}}
+// quando riapri il gioco: "c'è già un account, vuoi continuare o giocare uno nuovo?"
+let acc9Shown=0;
+function acc9Welcome(){if(acc9Shown||$('acc9w'))return;acc9Shown=1;const c=ACC9.cur();if(!c)return;const w=document.createElement('div');w.id='acc9w';
+  w.innerHTML=`<div class="bx"><div style="font-size:52px">${c.ic}</div><h2>Bentornat${S&&S.sex==='f'?'a':'o'}, ${esc(c.n)}!</h2><p>C'è già il tuo account: ${esc(ACC9.info(c.id))}</p>
+    <button type="button" class="b big" data-acc-x="1" style="border-radius:14px;border:0;background:#3fd98a;color:#04140a;font:900 17px var(--f-body);cursor:pointer">▶ Continua da dove avevi lasciato</button>
+    <div class="acc9" style="margin-top:12px">${ACC9.d().list.length>1?'<b style="font-size:13px">Oppure gioca con un altro account:</b>'+acc9List(0):''}
+    <b style="font-size:13px">Sei un'altra persona? Crea il tuo account:</b>${acc9Make('+ Nuovo')}<button type="button" class="b alt" data-acc-new="1">✨ Gioca una vita nuova con ${esc(c.n)}</button></div></div>`;
+  document.body.appendChild(w);acc9Bind(w);w.onclick=ev=>{if(ev.target===w)w.remove()}}
+{const _g=startGame;startGame=function(){const r=_g.apply(this,arguments);try{if(!acc9Shown&&(!navigator.webdriver||window.ACC9T))setTimeout(acc9Welcome,300);acc9Shown=acc9Shown||(navigator.webdriver&&!window.ACC9T)?1:acc9Shown}catch(e){}return r}}
+{const _sv=save;save=function(){if(acc9Busy)return;return _sv.apply(this,arguments)}}
+// app Account nel telefono
+PHX9.acc9={t:'👤 Account',h:()=>{const c=ACC9.cur();return `<div class="scr"><div class="acc9">${c?'':'<p style="margin:0;color:var(--soft)">Non hai ancora un account. Creane uno: così il gioco si ricorda di te!</p>'}${acc9List(1)}<b>Nuovo account</b>${acc9Make('Crea')}
+  ${c?`<button type="button" class="b alt" data-acc-new="1">✨ Vita nuova con ${esc(c.n)}</button>`:''}
+  <b style="margin-top:8px">📲 Gioca su un altro computer o telefono</b><p style="margin:0;color:var(--soft);font-size:13px">Copia il codice della tua partita e incollalo nel gioco sull'altro dispositivo (schermata iniziale o qui).</p>
+  <button type="button" class="b" data-acc-code="1">📋 Copia il codice della mia partita</button><textarea id="acc9code" placeholder="…oppure incolla qui un codice"></textarea><button type="button" class="b alt" data-acc-imp="1">Carica la partita dal codice</button></div></div>`},on(e){acc9Bind(e)}};
+{const _a=phApps;phApps=function(){const L=_a.apply(this,arguments),i=L.findIndex(x=>x[0]==='set');L.splice(i<0?L.length:i,0,['acc9','👤','Account']);return L}}
 function drawPalazzo(a){
   const X=a.x*T,Y=a.y*T,Wd=a.w*T,Hd=a.h*T,c=cx;
   c.fillStyle='rgba(0,0,0,.2)';c.beginPath();c.moveTo(X+Wd,Y+6);c.lineTo(X+Wd+14,Y+18);c.lineTo(X+Wd+14,Y+Hd+8);c.lineTo(X+10,Y+Hd+8);c.lineTo(X,Y+Hd);c.closePath();c.fill();
