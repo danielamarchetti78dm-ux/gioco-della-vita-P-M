@@ -1,3 +1,3 @@
-# Gioco della Vita
+# Gioco della Vita PM
 
-Gioca qui: https://danielamarchetti78dm-ux.github.io/gioco-della-vita-P-M/
+Questo spazio non è più usato.
